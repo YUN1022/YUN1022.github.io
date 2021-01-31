@@ -1,0 +1,19 @@
+{
+  "name": "tree-point",
+  "version": "1.0.0",
+  "description": "\"gamification bot\"",
+  "main": "draw_tree.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YUN1022/YUN1022.github.io.git"
+  },
+  "author": "a3302a0229@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/YUN1022/YUN1022.github.io/issues"
+  },
+  "homepage": "https://github.com/YUN1022/YUN1022.github.io#readme"
+}

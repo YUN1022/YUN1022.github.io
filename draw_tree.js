@@ -4,8 +4,25 @@ cx.translate(800,600);
 cx.rotate(180*Math.PI/180)
 cx.translate(400,0)
 //cx.translate(400,0)//變更原點位置 (0,0) -> (x,y)
-branch(22, 0.5, 0.8);
 
+initializeLiff("1655624196-wnWjnQAB")
+
+
+function initializeLiff(myLiffId) {
+    liff
+        .init({
+            liffId: myLiffId
+        })
+        .then(() => {
+            console.log('LIFF init')
+
+            branch(22, 0.5, 0.8);
+
+        })
+        .catch((err) => {
+            console.log(err)
+        });
+}
 function branch(length, angle, scale) {
     if (length < 30){
       cx.fillStyle = 'brown'
