@@ -14,12 +14,20 @@ function initializeLiff(myLiffId) {
             liffId: myLiffId
         })
         .then(() => {
-          let url = location.href;
           let myLink = liff.permanentLink.createUrl();
-          console.log(url);
+
+          if(myLink.indexOf('?')!=-1)
+          {
+            let ary1 = myLink.split('?');
+            let ary2 = ary1[1].split('=');
+            let size = ary2[1];
+          }
+
           console.log(myLink);
           console.log('LIFF init');
 
+          let num = document.getElementById('em');
+          num = size;
           branch(22, 0.5, 0.8);
 
         })
