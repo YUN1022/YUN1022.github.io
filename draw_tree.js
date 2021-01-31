@@ -27,9 +27,9 @@ function initializeLiff(myLiffId) {
           console.log(myLink);
           console.log('LIFF init');
 
-          let num = document.getElementById('num');
-          num.innerHTML = size;
-          branch(22, 0.5, 0.8);
+          // let num = document.getElementById('num');
+          // num.innerHTML = size;
+          branch(parseInt(size), 0.5, 0.8);
 
         })
         .catch((err) => {
