@@ -14,8 +14,8 @@ function initializeLiff(myLiffId) {
             liffId: myLiffId
         })
         .then(() => {
-          const myLink = liff.permanentLink.createUrl();
-          console.log(myLink);
+          let url = location.href;
+          console.log(url);
           console.log('LIFF init');
 
           branch(22, 0.5, 0.8);
