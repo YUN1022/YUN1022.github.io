@@ -21,6 +21,7 @@ function initializeLiff(myLiffId) {
             let ary1 = myLink.split('?');
             let ary2 = ary1[1].split('=');
             let size = ary2[1];
+            console.log(size);
           }
 
           console.log(myLink);
