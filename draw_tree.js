@@ -20,7 +20,7 @@ function initializeLiff(myLiffId) {
           {
             let ary1 = myLink.split('?');
             let ary2 = ary1[1].split('=');
-            let size = ary2[1];
+            var size = ary2[1];
             console.log(size);
           }
 
@@ -36,6 +36,7 @@ function initializeLiff(myLiffId) {
             console.log(err)
         });
 }
+
 function branch(length, angle, scale) {
     if (length < 30){
       cx.fillStyle = 'brown'
