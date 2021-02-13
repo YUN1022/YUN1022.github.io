@@ -1,9 +1,10 @@
 let canvas = document.getElementById("treeCanvas");
 let cx = canvas.getContext("2d");
+let status = []
+
 cx.translate(800,600); 
-cx.rotate(180*Math.PI/180)
-cx.translate(400,0)
-//cx.translate(400,0)//變更原點位置 (0,0) -> (x,y)
+cx.rotate(180*Math.PI/180);
+cx.translate(400,0);
 
 initializeLiff("1655624196-wnWjnQAB")
 
@@ -29,7 +30,7 @@ function initializeLiff(myLiffId) {
 
           // let num = document.getElementById('num');
           // num.innerHTML = size;
-          branch(parseInt(size), 0.5, 0.8);
+          branch(parseInt(size), 30, 0.8, 13);
 
         })
         .catch((err) => {
@@ -37,22 +38,28 @@ function initializeLiff(myLiffId) {
         });
 }
 
-function branch(length, angle, scale) {
-    if (length < 30){
-      cx.fillStyle = 'brown'
+function branch(length, angle, scale, n) {
+  if (n > 0){
+    if (n < 8){
+      cx.fillStyle = 'red'
       cx.fillRect(0, 0, 2, length);
     }
-    else{
-      cx.fillStyle = 'brown'
-      cx.fillRect(0, 0, 2, length); //畫長方形(x,y,width,height)
+    else {
+      cx.fillStyle = 'black'
+      cx.fillRect(0, 0, 2, length);
     }
-
-    if (length < 10) return;
-    cx.save();
-    cx.translate(0, length);
-    cx.rotate(-angle);
-    branch(length * scale, angle, scale);
-    cx.rotate(2 * angle);
-    branch(length * scale, angle, scale);
-    cx.restore();
   }
+  else{
+    return
+  }
+  
+  cx.save();
+  cx.translate(0, length);
+  cx.rotate(-angle * Math.PI/180);
+  branch(length * 0.8, angle, scale, n-1);
+
+  cx.rotate(2 * angle * Math.PI/180);
+  branch(length * 0.8, angle, scale, n-1);
+
+  cx.restore();
+}
