@@ -1,10 +1,11 @@
 let canvas = document.getElementById("treeCanvas");
+canvas.width  = 800;
+canvas.height = 600;
 let cx = canvas.getContext("2d");
-let status = []
 
-cx.translate(800,600); 
+cx.translate(canvas.width, canvas.height); 
 cx.rotate(180*Math.PI/180);
-cx.translate(400,0);
+cx.translate(canvas.width / 2, 0);
 
 initializeLiff("1655624196-wnWjnQAB")
 
@@ -19,10 +20,15 @@ function initializeLiff(myLiffId) {
 
           if(myLink.indexOf('?')!=-1)
           {
-            let ary1 = myLink.split('?');
-            let ary2 = ary1[1].split('=');
-            var size = ary2[1];
-            console.log(size);
+            var ary = url.split('?');
+            var ary = ary[1].split('&');
+            var length = ary[0].split('=')[1];
+            var angle = ary[1].split('=')[1];
+            var status_size = ary[2].split('=')[1];
+            var status_health = ary[3].split('=')[1];
+            var lscale = parseInt(ary[4].split('=')[1]);
+            var rscale = parseInt(ary[5].split('=')[1]);
+            var scale = [Boolean(lscale),Boolean(rscale)];
           }
 
           console.log(myLink);
@@ -30,7 +36,7 @@ function initializeLiff(myLiffId) {
 
           // let num = document.getElementById('num');
           // num.innerHTML = size;
-          branch(parseInt(size), 30, 0.8, 13);
+          branch(parseInt(length), parseInt(angle), scale, 12, status_size, status_health);
 
         })
         .catch((err) => {
@@ -38,28 +44,172 @@ function initializeLiff(myLiffId) {
         });
 }
 
-function branch(length, angle, scale, n) {
+function branch(length, angle, scale, n, status_size, status_health) {
   if (n > 0){
-    if (n < 8){
-      cx.fillStyle = 'red'
-      cx.fillRect(0, 0, 2, length);
+
+    switch(status_size){
+      case '0' :
+        tree('black' ,'green' ,length ,n ,8 ,status_health);
+        rmin = 0.1;
+        rmax = 0.8;
+        lmin = 0.1;
+        lmax = 0.8;          
+        break;
+      
+      case '1':
+        tree('black' ,'green' ,length ,n ,6 ,status_health);
+        if(scale[0]){
+          lmin = 0.65;
+          lmax = 0.8;                   
+        }else{
+          lmin = 0.4;
+          lmax = 0.65;            
+        }
+        if(scale[1]){
+          rmin = 0.65;
+          rmax = 0.8;                   
+        }else{
+          rmin = 0.4;
+          rmax = 0.65;            
+        }
+        break;
+
+      case '2':
+        tree('black' ,'green' ,length ,n ,6 ,status_health);
+        if(scale[0]){
+          lmin = 0.75;
+          lmax = 0.8;                   
+        }else{
+          lmin = 0.5;
+          lmax = 0.65;            
+        }
+        if(scale[1]){
+          rmin = 0.75;
+          rmax = 0.8;                   
+        }else{
+          rmin = 0.5;
+          rmax = 0.65;            
+        }
+        break;
+
+      case '3':
+        tree('black', 'green' ,length ,n ,6 ,status_health);
+        if(scale[0]){
+          lmin = 0.75;
+          lmax = 0.85;                   
+        }else{
+          lmin = 0.5;
+          lmax = 0.65;            
+        }
+        if(scale[1]){
+          rmin = 0.75;
+          rmax = 0.85;                   
+        }else{
+          rmin = 0.5;
+          rmax = 0.65;            
+        }
+        break;
+        
+      default:
+        tree('black' ,'green' ,length ,n ,8 ,status_health);
+        rmin = 0.8;
+        rmax = 0.8;
+        lmin = 0.8;
+        lmax = 0.8;
+        break;
     }
-    else {
-      cx.fillStyle = 'black'
-      cx.fillRect(0, 0, 2, length);
-    }
-  }
-  else{
-    return
-  }
-  
+
   cx.save();
   cx.translate(0, length);
   cx.rotate(-angle * Math.PI/180);
-  branch(length * 0.8, angle, scale, n-1);
+  branch(length * getRandomScale(lmin,lmax), angle * getRandomScale(0.9,1.1), scale, n-1, status_size, status_health);
 
   cx.rotate(2 * angle * Math.PI/180);
-  branch(length * 0.8, angle, scale, n-1);
+  branch(length * getRandomScale(rmin,rmax), angle * getRandomScale(0.9,1.1), scale, n-1, status_size, status_health);
 
-  cx.restore();
+  cx.restore();      
+  }
+}
+
+function getRandomScale(min, max) {
+  return Math.random() * (max - min) + min;
+}
+
+function tree(trunkColor, leafColor, length, n, leafscale, status_health){
+  switch(status_health){
+    case '-3':
+      if(n < leafscale){
+        break;
+      }
+      else{
+        cx.fillStyle = trunkColor
+        cx.fillRect(0, 0, 2, length);        
+      }
+      break;
+
+    case '-2':
+      if (n < leafscale){
+        p = getRandomScale(0,100);
+        if (p > 70){
+          cx.fillStyle = 'brown'
+          cx.fillRect(0, 0, 2, length);
+        }
+        else if(70 >= p && p > 15){
+          break;  
+        }
+        else{
+          cx.fillStyle = leafColor
+          cx.fillRect(0, 0, 2, length);      
+        }
+        
+      }
+      else {
+        cx.fillStyle = trunkColor
+        cx.fillRect(0, 0, 2, length);
+      }
+      break;
+
+    case '-1':
+      if (n < leafscale){
+        p = getRandomScale(0,100);
+        if (p > 70){
+          cx.fillStyle = 'brown'
+          cx.fillRect(0, 0, 2, length);
+        }
+        else{
+          cx.fillStyle = leafColor
+          cx.fillRect(0, 0, 2, length);      
+        }
+        
+      }
+      else {
+        cx.fillStyle = trunkColor
+        cx.fillRect(0, 0, 2, length);
+      }
+      break;
+    
+    case '0':
+      if (n < leafscale){
+        p = getRandomScale(0,100);
+        cx.fillStyle = leafColor
+        cx.fillRect(0, 0, 2, length);      
+      }
+      else {
+        cx.fillStyle = trunkColor
+        cx.fillRect(0, 0, 2, length);
+      }
+      break;
+
+    default:
+      temp = leafscale + 2
+      if (n < temp){
+        cx.fillStyle = 'green'
+        cx.fillRect(0, 0, 2, length);
+      }
+      else {
+        cx.fillStyle = 'black'
+        cx.fillRect(0, 0, 2, length);
+      }
+      break;
+  }
 }
