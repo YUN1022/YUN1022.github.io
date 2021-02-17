@@ -32,6 +32,7 @@ function initializeLiff(myLiffId) {
           }
 
           console.log(myLink);
+          console.log(ary)
           console.log('LIFF init');
 
           // let num = document.getElementById('num');
