@@ -20,7 +20,7 @@ function initializeLiff(myLiffId) {
 
           if(myLink.indexOf('?')!=-1)
           {
-            var ary = url.split('?');
+            var ary = myLink.split('?');
             var ary = ary[1].split('&');
             var length = ary[0].split('=')[1];
             var angle = ary[1].split('=')[1];
