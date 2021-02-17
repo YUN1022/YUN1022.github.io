@@ -17,7 +17,7 @@ function initializeLiff(myLiffId) {
         })
         .then(() => {
           let myLink = liff.permanentLink.createUrl();
-
+          console.log(myLink);
           if(myLink.indexOf('?')!=-1)
           {
             var ary = myLink.split('?');
@@ -30,9 +30,7 @@ function initializeLiff(myLiffId) {
             var rscale = parseInt(ary[5].split('=')[1]);
             var scale = [Boolean(lscale),Boolean(rscale)];
           }
-
-          console.log(myLink);
-          console.log(ary)
+          
           console.log('LIFF init');
 
           // let num = document.getElementById('num');
