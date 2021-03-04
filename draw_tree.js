@@ -199,6 +199,18 @@ function tree(trunkColor, leafColor, length, n, leafscale, status_health){
       }
       break;
 
+      case '1':
+        if (n < leafscale){
+          p = getRandomScale(0,100);
+          cx.fillStyle = leafColor
+          cx.fillRect(0, 0, 2, length);      
+        }
+        else {
+          cx.fillStyle = trunkColor
+          cx.fillRect(0, 0, 2, length);
+        }
+        break;
+
     default:
       temp = leafscale + 2
       if (n < temp){
