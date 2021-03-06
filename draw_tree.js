@@ -1,11 +1,5 @@
 let canvas = document.getElementById("treeCanvas");
-canvas.width  = 800;
-canvas.height = 600;
 let cx = canvas.getContext("2d");
-
-cx.translate(canvas.width, canvas.height); 
-cx.rotate(180*Math.PI/180);
-cx.translate(canvas.width / 2, 0);
 
 initializeLiff("1655624196-wnWjnQAB")
 
@@ -35,6 +29,37 @@ function initializeLiff(myLiffId) {
 
           // let num = document.getElementById('num');
           // num.innerHTML = size;
+
+          switch(status_size){
+            case '0':
+              canvas.width  = 400;
+              canvas.height = 300;
+              cx.translate(canvas.width, canvas.height); 
+              cx.rotate(180*Math.PI/180);
+              cx.translate(canvas.width / 2, 0);
+              break;
+            case '1':
+              canvas.width  = 600;
+              canvas.height = 450;
+              cx.translate(canvas.width, canvas.height); 
+              cx.rotate(180*Math.PI/180);
+              cx.translate(canvas.width / 2, 0);
+              break;
+            case '2':
+              canvas.width  = 800;
+              canvas.height = 600;
+              cx.translate(canvas.width, canvas.height); 
+              cx.rotate(180*Math.PI/180);
+              cx.translate(canvas.width / 2, 0);
+              break;
+            case '3':
+              canvas.width  = 800;
+              canvas.height = 600;
+              cx.translate(canvas.width, canvas.height); 
+              cx.rotate(180*Math.PI/180);
+              cx.translate(canvas.width / 2, 0);
+              break;                               
+          }
           branch(parseInt(length), parseInt(angle), scale, 12, status_size, status_health);
 
         })
