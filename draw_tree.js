@@ -34,6 +34,11 @@ function initializeLiff(myLiffId) {
             case '0':
               canvas.width  = 400;
               canvas.height = 300;
+
+              //background
+              cx.fillStyle = '#E0E0E0'
+              cx.fillRect(0, 0, canvas.width, canvas.height);
+              
               cx.translate(canvas.width, canvas.height); 
               cx.rotate(180*Math.PI/180);
               cx.translate(canvas.width / 2, 0);
@@ -41,6 +46,11 @@ function initializeLiff(myLiffId) {
             case '1':
               canvas.width  = 600;
               canvas.height = 450;
+
+              //background
+              cx.fillStyle = '#E0E0E0'
+              cx.fillRect(0, 0, canvas.width, canvas.height);
+
               cx.translate(canvas.width, canvas.height); 
               cx.rotate(180*Math.PI/180);
               cx.translate(canvas.width / 2, 0);
@@ -48,6 +58,11 @@ function initializeLiff(myLiffId) {
             case '2':
               canvas.width  = 800;
               canvas.height = 600;
+
+              //background
+              cx.fillStyle = '#E0E0E0'
+              cx.fillRect(0, 0, canvas.width, canvas.height);
+
               cx.translate(canvas.width, canvas.height); 
               cx.rotate(180*Math.PI/180);
               cx.translate(canvas.width / 2, 0);
@@ -55,14 +70,17 @@ function initializeLiff(myLiffId) {
             case '3':
               canvas.width  = 800;
               canvas.height = 600;
+
+              //background
+              cx.fillStyle = '#E0E0E0'
+              cx.fillRect(0, 0, canvas.width, canvas.height);
+
               cx.translate(canvas.width, canvas.height); 
               cx.rotate(180*Math.PI/180);
               cx.translate(canvas.width / 2, 0);
               break;                               
           }
-          //background
-          cx.fillStyle = '#E0E0E0'
-          cx.fillRect(0, 0, canvas.width, canvas.height);
+          
 
           branch(parseInt(length), parseInt(angle), scale, 12, status_size, status_health);
 
