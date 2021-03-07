@@ -60,6 +60,10 @@ function initializeLiff(myLiffId) {
               cx.translate(canvas.width / 2, 0);
               break;                               
           }
+          //background
+          cx.fillStyle = '#E0E0E0'
+          cx.fillRect(0, 0, canvas.width, canvas.height);
+
           branch(parseInt(length), parseInt(angle), scale, 12, status_size, status_health);
 
         })
