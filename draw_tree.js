@@ -1,5 +1,7 @@
 let canvas = document.getElementById("treeCanvas");
 let cx = canvas.getContext("2d");
+canvas.style.width = 800
+canvas.style.height = 600
 
 initializeLiff("1655624196-wnWjnQAB")
 
@@ -34,22 +36,14 @@ function initializeLiff(myLiffId) {
             case '0':
               canvas.width  = 400;
               canvas.height = 300;
-
-              //background
-              cx.fillStyle = '#E0E0E0'
-              cx.fillRect(0, 0, canvas.width, canvas.height);
               
               cx.translate(canvas.width, canvas.height); 
               cx.rotate(180*Math.PI/180);
               cx.translate(canvas.width / 2, 0);
               break;
             case '1':
-              canvas.width  = 600;
-              canvas.height = 450;
-
-              //background
-              cx.fillStyle = '#E0E0E0'
-              cx.fillRect(0, 0, canvas.width, canvas.height);
+              canvas.width  = 520;
+              canvas.height = 390;
 
               cx.translate(canvas.width, canvas.height); 
               cx.rotate(180*Math.PI/180);
@@ -59,10 +53,6 @@ function initializeLiff(myLiffId) {
               canvas.width  = 800;
               canvas.height = 600;
 
-              //background
-              cx.fillStyle = '#E0E0E0'
-              cx.fillRect(0, 0, canvas.width, canvas.height);
-
               cx.translate(canvas.width, canvas.height); 
               cx.rotate(180*Math.PI/180);
               cx.translate(canvas.width / 2, 0);
@@ -70,10 +60,6 @@ function initializeLiff(myLiffId) {
             case '3':
               canvas.width  = 800;
               canvas.height = 600;
-
-              //background
-              cx.fillStyle = '#E0E0E0'
-              cx.fillRect(0, 0, canvas.width, canvas.height);
 
               cx.translate(canvas.width, canvas.height); 
               cx.rotate(180*Math.PI/180);
