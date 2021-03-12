@@ -24,9 +24,9 @@ function initializeLiff(myLiffId) {
             var status_health = ary[3].split('=')[1];
             var lscale = parseInt(ary[4].split('=')[1]);
             var rscale = parseInt(ary[5].split('=')[1]);
-            var treeN = ary[6].split('=')[1];
+            // var treeN = ary[6].split('=')[1];
             var scale = [Boolean(lscale),Boolean(rscale)];
-            document.title=decodeURIComponent(treeN);
+            // document.title=decodeURIComponent(treeN);
           }
           
           console.log('LIFF init');
