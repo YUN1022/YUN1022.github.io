@@ -27,7 +27,7 @@ function initializeLiff(myLiffId) {
             var scale = [Boolean(lscale),Boolean(rscale)];
             // document.title=decodeURIComponent(treeN);
           }
-          
+
           console.log('LIFF init');
 
           // let num = document.getElementById('num');
@@ -71,23 +71,24 @@ function initializeLiff(myLiffId) {
 
           branch(parseInt(length), parseInt(angle), scale, 12, status_size, status_health);
 
+          liff.sendMessages([
+            {
+              type: 'text',
+              text: '我的樹看起來怎麼樣?'
+            }
+          ])
+            .then(() => {
+              console.log('message sent');
+            })
+            .catch((err) => {
+              console.log('error', err);
+            });
+
         })
         .catch((err) => {
             console.log(err)
         });
 
-    liff.sendMessages([
-      {
-        type: 'text',
-        text: 'Hello, World!'
-      }
-    ])
-      .then(() => {
-        console.log('message sent');
-      })
-      .catch((err) => {
-        console.log('error', err);
-      });
 }
 
 function branch(length, angle, scale, n, status_size, status_health) {
