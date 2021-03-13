@@ -7,8 +7,7 @@ initializeLiff("1655624196-wnWjnQAB")
 
 
 function initializeLiff(myLiffId) {
-    liff
-        .init({
+    liff.init({
             liffId: myLiffId
         })
         .then(() => {
@@ -76,6 +75,19 @@ function initializeLiff(myLiffId) {
         .catch((err) => {
             console.log(err)
         });
+
+    liff.sendMessages([
+      {
+        type: 'text',
+        text: 'Hello, World!'
+      }
+    ])
+      .then(() => {
+        console.log('message sent');
+      })
+      .catch((err) => {
+        console.log('error', err);
+      });
 }
 
 function branch(length, angle, scale, n, status_size, status_health) {
