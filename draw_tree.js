@@ -96,7 +96,7 @@ function branch(length, angle, scale, n, status_size, status_health) {
 
     switch(status_size){
       case '0' :
-        tree('black' ,'green' ,length ,n ,8 ,status_health);
+        tree('black' ,'green' ,length ,n ,8 ,0);
         rmin = 0.1;
         rmax = 0.8;
         lmin = 0.1;
