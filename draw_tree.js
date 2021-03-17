@@ -21,9 +21,10 @@ function initializeLiff(myLiffId) {
             var angle = ary[1].split('=')[1];
             var status_size = ary[2].split('=')[1];
             var status_health = ary[3].split('=')[1];
-            var lscale = parseInt(ary[4].split('=')[1]);
-            var rscale = parseInt(ary[5].split('=')[1]);
-            var scale = [Boolean(lscale),Boolean(rscale)];
+            var isRecovery = ary[4].split('=')[1];
+            // var lscale = parseInt(ary[4].split('=')[1]);
+            // var rscale = parseInt(ary[5].split('=')[1]);
+            // var scale = [Boolean(lscale),Boolean(rscale)];
           }
 
           console.log('LIFF init');
@@ -68,7 +69,7 @@ function initializeLiff(myLiffId) {
           
 
           if (parseInt(length) === 50){status_size = '0'}
-          branch(parseInt(length), parseInt(angle), scale, 12, status_size, status_health);
+          branch(parseInt(length), parseInt(angle), 12, status_size, status_health, parseInt(isRecovery));
 
           liff.sendMessages([
             {
@@ -90,88 +91,48 @@ function initializeLiff(myLiffId) {
 
 }
 
-function branch(length, angle, scale, n, status_size, status_health) {
+function branch(length, angle, n, status_size, status_health, isRecovery) {
   if (n > 0){
 
     switch(status_size){
       case '0' :
-        tree('black' ,'green' ,length ,n ,8 ,0);
-        rmin = 0.1;
-        rmax = 0.8;
-        lmin = 0.1;
-        lmax = 0.8;          
+        tree('black' ,'green' ,length ,n ,8 ,0, isRecovery);
+        scale_min = 0.1;
+        scale_max = 0.8;   
         break;
       
       case '1':
-        tree('black' ,'green' ,length ,n ,6 ,status_health);
-        if(scale[0]){
-          lmin = 0.65;
-          lmax = 0.8;                   
-        }else{
-          lmin = 0.4;
-          lmax = 0.65;            
-        }
-        if(scale[1]){
-          rmin = 0.65;
-          rmax = 0.8;                   
-        }else{
-          rmin = 0.4;
-          rmax = 0.65;            
-        }
+        tree('black' ,'green' ,length ,n ,6 ,status_health, isRecovery);
+        scale_min = 0.65;
+        scale_max = 0.8;
         break;
 
       case '2':
-        tree('black' ,'green' ,length ,n ,6 ,status_health);
-        if(scale[0]){
-          lmin = 0.75;
-          lmax = 0.8;                   
-        }else{
-          lmin = 0.5;
-          lmax = 0.65;            
-        }
-        if(scale[1]){
-          rmin = 0.75;
-          rmax = 0.8;                   
-        }else{
-          rmin = 0.5;
-          rmax = 0.65;            
-        }
+        tree('black' ,'green' ,length ,n ,6 ,status_health, isRecovery);
+        scale_min = 0.75;
+        scale_max = 0.8;
         break;
 
       case '3':
-        tree('black', 'green' ,length ,n ,6 ,status_health);
-        if(scale[0]){
-          lmin = 0.75;
-          lmax = 0.85;                   
-        }else{
-          lmin = 0.5;
-          lmax = 0.65;            
-        }
-        if(scale[1]){
-          rmin = 0.75;
-          rmax = 0.85;                   
-        }else{
-          rmin = 0.5;
-          rmax = 0.65;            
-        }
+        tree('black', 'green' ,length ,n ,6 ,status_health, isRecovery);
+        scale_min = 0.75;
+        scale_max = 0.85;
         break;
         
       default:
-        tree('black' ,'green' ,length ,n ,8 ,status_health);
-        rmin = 0.8;
-        rmax = 0.8;
-        lmin = 0.8;
-        lmax = 0.8;
+        tree('black' ,'green' ,length ,n ,8 ,status_health, isRecovery);
+        scale_min = 0.8;
+        scale_max = 0.8;
         break;
     }
 
   cx.save();
   cx.translate(0, length);
   cx.rotate(-angle * Math.PI/180);
-  branch(length * getRandomScale(lmin,lmax), angle * getRandomScale(0.9,1.1), scale, n-1, status_size, status_health);
+  branch(length * getRandomScale(scale_min,scale_max), angle * getRandomScale(0.9,1.1), n-1, status_size, status_health, isRecovery);
 
   cx.rotate(2 * angle * Math.PI/180);
-  branch(length * getRandomScale(rmin,rmax), angle * getRandomScale(0.9,1.1), scale, n-1, status_size, status_health);
+  branch(length * getRandomScale(scale_min,scale_max), angle * getRandomScale(0.9,1.1), n-1, status_size, status_health, isRecovery);
 
   cx.restore();      
   }
@@ -181,7 +142,7 @@ function getRandomScale(min, max) {
   return Math.random() * (max - min) + min;
 }
 
-function tree(trunkColor, leafColor, length, n, leafscale, status_health){
+function tree(trunkColor, leafColor, length, n, leafscale, status_health, isRecovery){
   switch(status_health){
     case '-3':
       if(n < leafscale){
@@ -195,19 +156,27 @@ function tree(trunkColor, leafColor, length, n, leafscale, status_health){
 
     case '-2':
       if (n < leafscale){
-        p = getRandomScale(0,100);
-        if (p > 70){
-          cx.fillStyle = 'brown'
-          cx.fillRect(0, 0, 2, length);
-        }
-        else if(70 >= p && p > 15){
-          break;  
+        if (isRecovery){
+          p = getRandomScale(0,100);
+          if (p > 95){
+            cx.fillStyle = leafColor;
+            cx.fillRect(0, 0, 2, length);            
+          }
         }
         else{
-          cx.fillStyle = leafColor
-          cx.fillRect(0, 0, 2, length);      
+          p = getRandomScale(0,100);
+          if (p > 70){
+            cx.fillStyle = 'brown'
+            cx.fillRect(0, 0, 2, length);
+          }
+          else if(70 >= p && p > 15){
+            break;  
+          }
+          else{
+            cx.fillStyle = leafColor
+            cx.fillRect(0, 0, 2, length);      
+          }
         }
-        
       }
       else {
         cx.fillStyle = trunkColor
@@ -217,16 +186,24 @@ function tree(trunkColor, leafColor, length, n, leafscale, status_health){
 
     case '-1':
       if (n < leafscale){
-        p = getRandomScale(0,100);
-        if (p > 70){
-          cx.fillStyle = 'brown'
-          cx.fillRect(0, 0, 2, length);
+        if (isRecovery){
+          p = getRandomScale(0,100);
+          if (p > 50){
+            cx.fillStyle = leafColor
+            cx.fillRect(0, 0, 2, length);
+          }          
         }
         else{
-          cx.fillStyle = leafColor
-          cx.fillRect(0, 0, 2, length);      
+          p = getRandomScale(0,100);
+          if (p > 70){
+            cx.fillStyle = 'brown'
+            cx.fillRect(0, 0, 2, length);
+          }
+          else{
+            cx.fillStyle = leafColor
+            cx.fillRect(0, 0, 2, length);      
+          }
         }
-        
       }
       else {
         cx.fillStyle = trunkColor
