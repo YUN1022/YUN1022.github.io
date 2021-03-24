@@ -71,12 +71,19 @@ function initializeLiff(myLiffId) {
           if (parseInt(length) === 50){status_size = '0'}
           branch(parseInt(length), parseInt(angle), 12, status_size, status_health, parseInt(isRecovery));
 
-          await liff.sendMessages([
+          liff.sendMessages([
             {
-              type: 'text',
-              text: '我的樹看起來怎麼樣?'
-            }
+              "type": "image",
+              "originalContentUrl": "https://i.imgur.com/sT4cEcn.png",
+              "previewImageUrl": "https://i.imgur.com/sT4cEcn.png"
+          }
           ])
+            .then(() => {
+              console.log('message sent');
+            })
+            .catch((err) => {
+              console.log('error', err);
+            });
 
         })
         .catch((err) => {
