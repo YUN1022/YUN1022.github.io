@@ -71,13 +71,11 @@ function initializeLiff(myLiffId) {
           if (parseInt(length) === 50){status_size = '0'}
           branch(parseInt(length), parseInt(angle), 12, status_size, status_health, parseInt(isRecovery));
 
-          liff.sendMessages([
-            {
-              type: 'image',
-              originalContentUrl: 'https://i.imgur.com/sT4cEcn.png?status_size=100',
-              previewImageUrl: 'https://i.imgur.com/sT4cEcn.png?status_size=100'
-            }
-          ]);
+          await liff.sendMessages([{
+            type: 'image',
+            originalContentUrl: 'https://i.imgur.com/MwS42AE.png?sender=Brown',
+            previewImageUrl: 'https://i.imgur.com/MwS42AE.png?sender=Brown'
+          }])
 
         })
         .catch((err) => {
