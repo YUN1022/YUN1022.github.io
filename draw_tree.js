@@ -73,8 +73,9 @@ function initializeLiff(myLiffId) {
 
           liff.sendMessages([
             {
-              type: 'text',
-              text: '這顆樹看起來怎麼樣?'
+              "type": "sticker",
+              "packageId": "1",
+              "stickerId": "1"
             }
           ])
             .then(() => {
