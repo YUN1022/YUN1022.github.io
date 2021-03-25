@@ -73,8 +73,9 @@ function initializeLiff(myLiffId) {
 
           liff.sendMessages([
             {
-              type: 'text',
-              text: '我的樹看起來怎麼樣?'
+              type: 'image',
+              originalContentUrl: 'https://i.imgur.com/MwS42AE.png?sender=Brown',
+              previewImageUrl: 'https://i.imgur.com/MwS42AE.png?sender=Brown'
             }
           ])
             .then(() => {
