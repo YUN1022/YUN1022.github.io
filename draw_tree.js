@@ -73,9 +73,9 @@ function initializeLiff(myLiffId) {
 
           liff.sendMessages([
             {
-              "type": "sticker",
-              "packageId": "1",
-              "stickerId": "1"
+              "type": "image",
+              "originalContentUrl": "https://i.imgur.com/uwFy8BI.png",
+              "previewImageUrl": "https://i.imgur.com/uwFy8BI.png"
             }
           ])
             .then(() => {
