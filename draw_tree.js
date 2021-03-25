@@ -74,8 +74,8 @@ function initializeLiff(myLiffId) {
           liff.sendMessages([
             {
               type: 'image',
-              originalContentUrl: 'https://i.imgur.com/MwS42AE.png?sender=Brown',
-              previewImageUrl: 'https://i.imgur.com/MwS42AE.png?sender=Brown'
+              originalContentUrl: 'https://i.imgur.com/sT4cEcn.png?status_size='+String(status_size)+'&status_health='+String(status_health)+'&isRecovery='+String(isRecovery),
+              previewImageUrl: 'https://i.imgur.com/sT4cEcn.png?status_size=50&status_health=0&isRecovery=1'
             }
           ])
             .then(() => {
