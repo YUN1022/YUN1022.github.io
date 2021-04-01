@@ -29,7 +29,7 @@ function initializeLiff(myLiffId) {
 
           console.log('LIFF init');
 
-          // let num = document.getElementById('num');
+          let num = document.getElementById('4/1日快樂');
           // num.innerHTML = size;
 
           switch(status_size){
