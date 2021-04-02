@@ -28,7 +28,7 @@ function initializeLiff(myLiffId) {
           }
 
           console.log('LIFF init');
-          document.title=decodeURIComponent('4/1日快樂');
+          document.title=decodeURIComponent('tree');
           // let num = document.getElementById('4/1日快樂');
           // num.innerHTML = size;
 
